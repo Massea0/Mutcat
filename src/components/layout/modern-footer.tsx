@@ -52,21 +52,7 @@ export function ModernFooter() {
   ]
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white mt-20">
-      {/* Wave decoration */}
-      <div className="absolute top-0 left-0 right-0 -translate-y-full">
-        <svg className="w-full h-20" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 50L60 45.8C120 41.7 240 33.3 360 33.3C480 33.3 600 41.7 720 45.8C840 50 960 50 1080 45.8C1200 41.7 1320 33.3 1380 29.2L1440 25V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0V50Z" 
-            fill="url(#gradient)" />
-          <defs>
-            <linearGradient id="gradient" x1="0" y1="0" x2="1440" y2="0">
-              <stop offset="0%" stopColor="#111827" />
-              <stop offset="50%" stopColor="#1f2937" />
-              <stop offset="100%" stopColor="#111827" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white mt-20 overflow-hidden">
 
       {/* Newsletter Section */}
       <div className="border-b border-gray-700">
@@ -104,12 +90,14 @@ export function ModernFooter() {
           {/* Logo & Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-3 mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-senegal-green-500 via-senegal-yellow-500 to-senegal-red-500 rounded-xl blur-lg opacity-75"></div>
-                <div className="relative bg-white rounded-xl p-3">
-                  <Building className="h-8 w-8 text-senegal-green-600" />
-                </div>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="MUCTAT Logo" 
+                className="h-12 w-auto"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/logo-placeholder.svg';
+                }}
+              />
               <div>
                 <h2 className="text-2xl font-bold">MUCTAT</h2>
                 <p className="text-sm text-gray-400">République du Sénégal</p>

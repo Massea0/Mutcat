@@ -219,29 +219,31 @@ export function FloatingHeader() {
   return (
     <>
       {/* Spacer pour éviter que le contenu passe sous la navbar */}
-      <div className="h-20"></div>
+      <div className="h-16"></div>
       
       {/* Navbar flottante */}
       <header className={cn(
         "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500",
-        "w-[95%] max-w-7xl",
+        "w-[98%] max-w-7xl",
         isScrolled 
           ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50" 
           : "bg-white/80 dark:bg-gray-900/80 shadow-xl backdrop-blur-lg border border-gray-200/30 dark:border-gray-700/30",
         "rounded-2xl"
       )}>
-        <div className="px-6 py-4">
+        <div className="px-4 py-2">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-senegal-green-500 via-senegal-yellow-500 to-senegal-red-500 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                <div className="relative bg-white dark:bg-gray-900 rounded-xl p-2">
-                  <Building className="h-6 w-6 text-senegal-green-600" />
-                </div>
-              </div>
-              <div>
-                <h1 className="text-lg font-bold bg-gradient-to-r from-senegal-green-600 to-senegal-green-500 bg-clip-text text-transparent">
+            <Link href="/" className="flex items-center space-x-2 group">
+              <img 
+                src="/logo.png" 
+                alt="MUCTAT Logo" 
+                className="h-10 w-auto transition-transform group-hover:scale-105"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/logo-placeholder.svg';
+                }}
+              />
+              <div className="hidden sm:block">
+                <h1 className="text-sm font-bold bg-gradient-to-r from-senegal-green-600 to-senegal-green-500 bg-clip-text text-transparent">
                   MUCTAT
                 </h1>
                 <p className="text-xs text-gray-600 dark:text-gray-400">République du Sénégal</p>
@@ -306,45 +308,45 @@ export function FloatingHeader() {
             </NavigationMenu>
 
             {/* Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               {/* Search Button */}
               <Button
                 variant="ghost"
-                size="icon"
-                className="rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 w-8 p-0"
                 aria-label="Rechercher"
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-4 w-4" />
               </Button>
 
               {/* Language Switcher */}
               <Button
                 variant="ghost"
-                size="icon"
-                className="rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 w-8 p-0 hidden sm:flex"
                 aria-label="Changer de langue"
               >
-                <Globe className="h-5 w-5" />
+                <Globe className="h-4 w-4" />
               </Button>
 
               {/* Dark Mode Toggle */}
               <Button
                 variant="ghost"
-                size="icon"
-                className="rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
+                size="sm"
+                className="rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 w-8 p-0 hidden sm:flex"
                 onClick={toggleDarkMode}
                 aria-label="Basculer le mode sombre"
               >
                 {isDarkMode ? (
-                  <Sun className="h-5 w-5" />
+                  <Sun className="h-4 w-4" />
                 ) : (
-                  <Moon className="h-5 w-5" />
+                  <Moon className="h-4 w-4" />
                 )}
               </Button>
 
               {/* CTA Button */}
-              <Link href="/admin" className="hidden sm:block">
-                <Button className="rounded-xl bg-gradient-to-r from-senegal-green-500 to-senegal-green-600 hover:from-senegal-green-600 hover:to-senegal-green-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105">
+              <Link href="/admin" className="hidden lg:block">
+                <Button size="sm" className="rounded-lg bg-gradient-to-r from-senegal-green-500 to-senegal-green-600 hover:from-senegal-green-600 hover:to-senegal-green-700 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs px-3 py-1">
                   Espace Intranet
                 </Button>
               </Link>
@@ -352,15 +354,15 @@ export function FloatingHeader() {
               {/* Mobile Menu Toggle */}
               <Button
                 variant="ghost"
-                size="icon"
-                className="lg:hidden rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-800/50"
+                size="sm"
+                className="lg:hidden rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 w-8 p-0"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Menu"
               >
                 {isMobileMenuOpen ? (
-                  <X className="h-6 w-6" />
+                  <X className="h-5 w-5" />
                 ) : (
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5" />
                 )}
               </Button>
             </div>

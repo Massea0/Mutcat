@@ -1,0 +1,11 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="url(#gradient)"/>
+  <text x="50" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#00853F">MUCTAT</text>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+      <stop offset="0%" stop-color="#00853F"/>
+      <stop offset="50%" stop-color="#FDEF42"/>
+      <stop offset="100%" stop-color="#E31E24"/>
+    </linearGradient>
+  </defs>
+</svg>
