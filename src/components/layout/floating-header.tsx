@@ -160,19 +160,19 @@ export function FloatingHeader() {
       children: [
         {
           title: 'Publications',
-          href: '/services/publications',
+          href: '/publications',
           icon: Download,
           description: 'Documents et rapports'
         },
         {
           title: 'Appels d\'offres',
-          href: '/services/appels-offres',
+          href: '/appels-offres',
           icon: Briefcase,
           description: 'Marchés publics'
         },
         {
           title: 'FAQ',
-          href: '/services/faq',
+          href: '/faq',
           icon: HelpCircle,
           description: 'Questions fréquentes'
         },
