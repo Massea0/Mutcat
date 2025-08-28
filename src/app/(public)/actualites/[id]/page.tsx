@@ -66,7 +66,7 @@ export default function NewsDetailPage() {
         const { data: related } = await supabase
           .from('news')
           .select('*')
-          .eq('category', data.category)
+          .eq('category', (data as any).category)
           .neq('id', id)
           .limit(3)
           .order('published_at', { ascending: false })

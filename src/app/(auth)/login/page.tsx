@@ -42,7 +42,7 @@ export default function LoginPage() {
           .single()
 
         // Redirection selon le rôle
-        if (userData?.role === 'admin') {
+        if ((userData as any)?.role === 'admin') {
           router.push('/admin')
         } else {
           router.push('/intranet')

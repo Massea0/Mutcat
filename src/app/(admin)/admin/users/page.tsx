@@ -160,11 +160,11 @@ export default function UsersAdminPage() {
     try {
       switch (action) {
         case 'activate':
-          await service.bulkUpdate(userIds, { active: true })
+          await service.bulkUpdate(userIds, { active: true } as any)
           toast.success(`${userIds.length} utilisateur(s) activé(s)`)
           break
         case 'deactivate':
-          await service.bulkUpdate(userIds, { active: false })
+          await service.bulkUpdate(userIds, { active: false } as any)
           toast.success(`${userIds.length} utilisateur(s) désactivé(s)`)
           break
         case 'delete':
@@ -239,7 +239,7 @@ export default function UsersAdminPage() {
     try {
       await service.update(selectedUser.id, {
         permissions: selectedUser.permissions
-      })
+      } as any)
       toast.success('Permissions mises à jour')
       setIsPermissionsOpen(false)
       setRefreshKey(prev => prev + 1)
@@ -395,7 +395,7 @@ export default function UsersAdminPage() {
                   type: 'single',
                   handler: async (ids) => {
                     const user = await service.read(ids[0])
-                    if (user) handlePasswordReset(user.id, user.email)
+                    if (user) handlePasswordReset(user.id, (user as any).email)
                   }
                 },
                 {

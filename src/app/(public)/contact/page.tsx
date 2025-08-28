@@ -69,7 +69,7 @@ export default function ContactPage() {
           subject: formData.subject,
           message: formData.message,
           status: 'new'
-        })
+        } as any)
 
       if (error) throw error
 

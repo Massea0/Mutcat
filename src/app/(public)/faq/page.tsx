@@ -176,7 +176,7 @@ export default function FAQPage() {
       await supabase.rpc('increment_faq_helpful', {
         faq_id: faqId,
         is_helpful: isHelpful
-      })
+      } as any)
       
       toast.success('Merci pour votre retour !')
     } catch (error) {

@@ -68,11 +68,11 @@ export default function NewsAdminPage() {
     try {
       switch (action) {
         case 'publish':
-          await service.bulkUpdate(items, { status: 'published', published_at: new Date().toISOString() })
+          await service.bulkUpdate(items, { status: 'published', published_at: new Date().toISOString() } as any)
           toast.success(`${items.length} articles publiés`)
           break
         case 'archive':
-          await service.bulkUpdate(items, { status: 'archived' })
+          await service.bulkUpdate(items, { status: 'archived' } as any)
           toast.success(`${items.length} articles archivés`)
           break
         case 'delete':

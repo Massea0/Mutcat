@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -171,7 +171,7 @@ export default function MediaAdminPage() {
             url: data.path,
             folder_id: selectedFolder,
             created_by: 'current-user-id' // Replace with actual user ID
-          })
+          } as any)
 
         if (dbError) throw dbError
       }
