@@ -318,7 +318,7 @@ export default function SettingsPage() {
                 <Label htmlFor="site_description">Description</Label>
                 <Textarea
                   id="site_description"
-                  value={settings.site_description}
+                  value={settings.site_description || ''}
                   onChange={(e) => updateSetting('site_description', e.target.value)}
                   placeholder="Description du site"
                   rows={3}
@@ -432,7 +432,7 @@ export default function SettingsPage() {
                   <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Textarea
                     id="contact_address"
-                    value={settings.contact_address}
+                    value={settings.contact_address || ''}
                     onChange={(e) => updateSetting('contact_address', e.target.value)}
                     placeholder="Adresse complète"
                     className="pl-10"
@@ -667,7 +667,7 @@ export default function SettingsPage() {
                 <Label htmlFor="maintenance_message">Message de maintenance</Label>
                 <Textarea
                   id="maintenance_message"
-                  value={settings.maintenance_message}
+                  value={settings.maintenance_message || ''}
                   onChange={(e) => updateSetting('maintenance_message', e.target.value)}
                   placeholder="Message affiché aux visiteurs"
                   rows={3}
