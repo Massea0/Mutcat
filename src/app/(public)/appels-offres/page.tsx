@@ -81,7 +81,7 @@ export default function AppelsOffresPage() {
       const from = (page - 1) * itemsPerPage
       const to = from + itemsPerPage - 1
       query = query.range(from, to)
-      query = query.order('submission_deadline', { ascending: true })
+      query = query.order('created_at', { ascending: false })
 
       const { data, count, error } = await query
 
