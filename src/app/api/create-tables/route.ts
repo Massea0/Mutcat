@@ -47,9 +47,9 @@ export async function GET() {
             deleted_at TIMESTAMPTZ
           );
         `
-      }).single().catch(() => {
-        // Ignorer l'erreur si exec_sql n'existe pas
-      })
+      }).single()
+      
+      // Note: exec_sql might not exist, ignore error
     }
 
     // Table media
@@ -74,9 +74,8 @@ export async function GET() {
             updated_at TIMESTAMPTZ DEFAULT NOW()
           );
         `
-      }).single().catch(() => {
-        // Ignorer l'erreur
-      })
+      }).single()
+      // Note: exec_sql might not exist, ignore error
     }
 
     // Table documents

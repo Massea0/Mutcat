@@ -94,7 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .order('updated_at', { ascending: false })
     .limit(100)
 
-  const projectPages: MetadataRoute.Sitemap = projects?.map((project) => ({
+  const projectPages: MetadataRoute.Sitemap = projects?.map((project: any) => ({
     url: `${baseUrl}/projets/${project.id}`,
     lastModified: new Date(project.updated_at),
     changeFrequency: 'monthly',
@@ -108,7 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .order('updated_at', { ascending: false })
     .limit(100)
 
-  const newsPages: MetadataRoute.Sitemap = news?.map((article) => ({
+  const newsPages: MetadataRoute.Sitemap = news?.map((article: any) => ({
     url: `${baseUrl}/actualites/${article.id}`,
     lastModified: new Date(article.updated_at),
     changeFrequency: 'monthly',
@@ -123,7 +123,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .order('updated_at', { ascending: false })
     .limit(50)
 
-  const tenderPages: MetadataRoute.Sitemap = tenders?.map((tender) => ({
+  const tenderPages: MetadataRoute.Sitemap = tenders?.map((tender: any) => ({
     url: `${baseUrl}/appels-offres/${tender.id}`,
     lastModified: new Date(tender.updated_at),
     changeFrequency: 'weekly',

@@ -32,8 +32,8 @@ export async function POST(request: Request) {
       user: {
         id: data.user.id,
         email: data.user.email,
-        role: userData?.role || 'viewer',
-        full_name: data.user.user_metadata?.full_name || userData?.full_name,
+        role: (userData as any)?.role || 'viewer',
+        full_name: data.user.user_metadata?.full_name || (userData as any)?.full_name,
         department: data.user.user_metadata?.department
       }
     })

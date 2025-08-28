@@ -21,7 +21,7 @@ export async function GET() {
     
     // Récupérer la liste des tables
     const { data: tables, error: tablesError } = await supabase
-      .rpc('get_tables_info', {})
+      .rpc('get_tables_info')
       .select('*')
     
     // Si la fonction n'existe pas, essayons une autre approche
@@ -49,7 +49,7 @@ export async function GET() {
     }
     
     // Tester quelques requêtes sur les tables principales
-    const results = {}
+    const results: any = {}
     
     // Test sur la table users
     const { data: usersData, error: usersError } = await supabase

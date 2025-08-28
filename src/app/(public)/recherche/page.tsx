@@ -56,7 +56,7 @@ function SearchResults() {
           .limit(10)
         
         projects?.forEach(item => {
-          allResults.push({ ...item, type: 'project' })
+          allResults.push({ ...(item as any), type: 'project' })
         })
       }
 
@@ -68,7 +68,7 @@ function SearchResults() {
           .limit(10)
         
         news?.forEach(item => {
-          allResults.push({ ...item, type: 'news' })
+          allResults.push({ ...(item as any), type: 'news' })
         })
       }
 
@@ -81,7 +81,7 @@ function SearchResults() {
           .limit(10)
         
         tenders?.forEach(item => {
-          allResults.push({ ...item, type: 'tender' })
+          allResults.push({ ...(item as any), type: 'tender' })
         })
       }
 
@@ -94,7 +94,7 @@ function SearchResults() {
           .limit(10)
         
         publications?.forEach(item => {
-          allResults.push({ ...item, type: 'publication' })
+          allResults.push({ ...(item as any), type: 'publication' })
         })
       }
 
@@ -107,7 +107,7 @@ function SearchResults() {
           .limit(10)
         
         events?.forEach(item => {
-          allResults.push({ ...item, type: 'event' })
+          allResults.push({ ...(item as any), type: 'event' })
         })
       }
 
@@ -120,7 +120,7 @@ function SearchResults() {
           .limit(10)
         
         careers?.forEach(item => {
-          allResults.push({ ...item, type: 'career' })
+          allResults.push({ ...(item as any), type: 'career' })
         })
       }
 
@@ -131,7 +131,7 @@ function SearchResults() {
         query: searchQuery,
         result_type: type,
         clicked: false
-      })
+      } as any)
     } catch (error) {
       console.error('Search error:', error)
     } finally {

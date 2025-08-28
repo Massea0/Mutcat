@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
       .eq('id', user.id)
       .single()
 
-    if (userError || !userData || (userData.role !== 'admin' && userData.role !== 'agent')) {
+    if (userError || !userData || ((userData as any).role !== 'admin' && (userData as any).role !== 'agent')) {
       return NextResponse.json(
         { error: 'Insufficient permissions' },
         { status: 403 }
@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
           scheduled_at: scheduledAt,
           status: 'scheduled',
           author_id: user.id
-        })
+        } as any)
         .select()
         .single()
 
@@ -191,7 +191,7 @@ export async function POST(request: NextRequest) {
         status: errors.length === 0 ? 'published' : 'failed',
         author_id: user.id,
         engagement_stats: { results, errors }
-      })
+      } as any)
       .select()
       .single()
 

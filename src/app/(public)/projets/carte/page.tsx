@@ -284,7 +284,7 @@ export default function ProjectMapPage() {
                   <div className="space-y-3 max-h-[450px] overflow-y-auto">
                     {(selectedRegion === 'all' ? projects : projectsByRegion[selectedRegion] || [])
                       .slice(0, 10)
-                      .map((project) => (
+                      .map((project: any) => (
                         <div
                           key={project.id}
                           className="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
