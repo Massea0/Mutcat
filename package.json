@@ -11,7 +11,9 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "test": "echo \"No tests configured yet\"",
     "db:push": "echo \"Run migrations in Supabase dashboard\"",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "seed:users": "tsx src/scripts/seed-users.ts",
+    "seed:users:simple": "tsx src/scripts/seed-users-simple.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -64,6 +66,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.1",
+    "tsx": "^4.20.5",
     "typescript": "^5"
   },
   "description": "## 🇸🇳 Vue d'ensemble",
