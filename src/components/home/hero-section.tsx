@@ -1,157 +1,194 @@
-"use client"
+'use client'
 
-import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { ChevronRight, Building2, Users, Map, ArrowRight } from 'lucide-react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-
-const slides = [
-  {
-    title: "Vision Sénégal 2050",
-    subtitle: "Bâtir l'avenir urbain du Sénégal",
-    description: "Un développement territorial équilibré et durable pour tous les Sénégalais",
-    image: "/images/hero-1.jpg",
-    cta: { text: "Découvrir la Vision", href: "/projets/vision-2050" }
-  },
-  {
-    title: "Programme PNALRU",
-    subtitle: "500 000 logements sur 15 ans",
-    description: "Accès au logement décent et rénovation urbaine pour tous",
-    image: "/images/hero-2.jpg",
-    cta: { text: "En savoir plus", href: "/projets/pnalru" }
-  },
-  {
-    title: "Pôles Territoriaux",
-    subtitle: "8 axes de croissance nationale",
-    description: "Décentralisation et développement économique équilibré",
-    image: "/images/hero-3.jpg",
-    cta: { text: "Explorer les pôles", href: "/projets/poles" }
-  }
-]
+import { Button } from '@/components/ui/button'
+import { ChevronLeft, ChevronRight, Play, ArrowRight } from 'lucide-react'
+import { cmsService, type HeroSlide } from '@/lib/cms/services'
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [slides, setSlides] = useState<HeroSlide[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    loadSlides()
+  }, [])
+
+  useEffect(() => {
+    if (slides.length === 0) return
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
+
     return () => clearInterval(timer)
-  }, [])
+  }, [slides.length])
+
+  const loadSlides = async () => {
+    try {
+      const data = await cmsService.getHeroSliders()
+      
+      // Si pas de slides dans la DB, utiliser les slides par défaut
+      if (!data || data.length === 0) {
+        setSlides(defaultSlides)
+      } else {
+        setSlides(data)
+      }
+    } catch (error) {
+      console.error('Error loading slides:', error)
+      setSlides(defaultSlides)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+  }
+
+  if (loading) {
+    return (
+      <section className="relative h-[600px] bg-gradient-to-br from-senegal-green-600 to-senegal-green-700">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+        </div>
+      </section>
+    )
+  }
+
+  if (slides.length === 0) return null
 
   return (
-    <section className="relative h-[600px] overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
-      {/* Image de fond avec overlay */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent z-10" />
-        <div 
-          className="h-full w-full bg-cover bg-center transition-all duration-1000"
-          style={{
-            backgroundImage: `url('/images/placeholder.svg')`,
-          }}
-        />
-      </div>
-
-      {/* Contenu */}
-      <div className="relative z-20 flex h-full items-center">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-            <div className="space-y-6">
-              {/* Badge */}
-              <div className="inline-flex items-center rounded-full bg-senegal-green-500/20 px-4 py-2 backdrop-blur-sm">
-                <span className="text-sm font-semibold text-senegal-green-400">
-                  République du Sénégal
-                </span>
-              </div>
-
-              {/* Titre principal animé */}
-              <div className="space-y-4">
-                {slides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className={`transition-all duration-500 ${
-                      index === currentSlide
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 translate-y-4 absolute'
-                    }`}
-                  >
-                    <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-                      {slide.title}
-                    </h1>
-                    <p className="text-xl text-senegal-yellow-400 font-semibold mt-2">
-                      {slide.subtitle}
-                    </p>
-                    <p className="text-lg text-gray-300 mt-4">
-                      {slide.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Boutons d'action */}
-              <div className="flex flex-wrap gap-4 pt-8">
-                <Link href={slides[currentSlide].cta.href}>
-                  <Button size="lg" variant="gradient" className="group">
-                    {slides[currentSlide].cta.text}
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
-                    Nous Contacter
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Indicateurs de slide */}
-              <div className="flex space-x-2 pt-4">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentSlide
-                        ? 'w-8 bg-senegal-yellow-500'
-                        : 'w-2 bg-white/30 hover:bg-white/50'
-                    }`}
-                    aria-label={`Aller au slide ${index + 1}`}
-                  />
-                ))}
-              </div>
+    <section className="relative h-[600px] overflow-hidden">
+      {/* Slides */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          {/* Background Image */}
+          {slide.image_url ? (
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.image_url})` }}
+            >
+              <div className="absolute inset-0 bg-black/50"></div>
             </div>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-senegal-green-600 to-senegal-green-700"></div>
+          )}
 
-            {/* Carte des statistiques rapides */}
-            <div className="hidden lg:block">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="group rounded-2xl bg-white/10 backdrop-blur-md p-6 transition-all hover:bg-white/20 hover:scale-105">
-                  <Building2 className="h-10 w-10 text-senegal-yellow-400 mb-3" />
-                  <div className="text-3xl font-bold text-white">39K+</div>
-                  <div className="text-sm text-gray-300">Logements construits</div>
-                </div>
-                <div className="group rounded-2xl bg-white/10 backdrop-blur-md p-6 transition-all hover:bg-white/20 hover:scale-105">
-                  <Users className="h-10 w-10 text-senegal-green-400 mb-3" />
-                  <div className="text-3xl font-bold text-white">552</div>
-                  <div className="text-sm text-gray-300">Collectivités territoriales</div>
-                </div>
-                <div className="group rounded-2xl bg-white/10 backdrop-blur-md p-6 transition-all hover:bg-white/20 hover:scale-105">
-                  <Map className="h-10 w-10 text-senegal-red-400 mb-3" />
-                  <div className="text-3xl font-bold text-white">14</div>
-                  <div className="text-sm text-gray-300">Régions couvertes</div>
-                </div>
-                <div className="group rounded-2xl bg-white/10 backdrop-blur-md p-6 transition-all hover:bg-white/20 hover:scale-105">
-                  <ChevronRight className="h-10 w-10 text-blue-400 mb-3" />
-                  <div className="text-3xl font-bold text-white">8</div>
-                  <div className="text-sm text-gray-300">Pôles territoriaux</div>
-                </div>
+          {/* Content */}
+          <div className="relative h-full flex items-center">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl">
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 animate-fade-in-up">
+                  {slide.title}
+                </h1>
+                {slide.subtitle && (
+                  <h2 className="text-xl md:text-2xl text-white/90 mb-6 animate-fade-in-up animation-delay-200">
+                    {slide.subtitle}
+                  </h2>
+                )}
+                {slide.description && (
+                  <p className="text-lg text-white/80 mb-8 animate-fade-in-up animation-delay-400">
+                    {slide.description}
+                  </p>
+                )}
+                {slide.button_text && slide.button_link && (
+                  <div className="flex flex-wrap gap-4 animate-fade-in-up animation-delay-600">
+                    <Link href={slide.button_link}>
+                      <Button size="lg" className="bg-white text-senegal-green-600 hover:bg-gray-100">
+                        {slide.button_text}
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ))}
 
-      {/* Dégradé décoratif en bas */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-gray-900 to-transparent" />
+      {/* Navigation Arrows */}
+      {slides.length > 1 && (
+        <>
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+            aria-label="Slide précédent"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+            aria-label="Slide suivant"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </>
+      )}
+
+      {/* Dots Indicator */}
+      {slides.length > 1 && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentSlide
+                  ? 'w-8 bg-white'
+                  : 'bg-white/50 hover:bg-white/70'
+              }`}
+              aria-label={`Aller au slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
+
+// Slides par défaut si aucune donnée dans la DB
+const defaultSlides: HeroSlide[] = [
+  {
+    id: '1',
+    title: 'Bâtir le Sénégal de demain',
+    subtitle: 'Vision 2050',
+    description: 'Un développement urbain durable et inclusif pour tous les Sénégalais',
+    image_url: '/images/dakar-skyline.jpg',
+    button_text: 'Découvrir nos projets',
+    button_link: '/projets',
+    order_index: 0
+  },
+  {
+    id: '2',
+    title: 'Programme National de Logements Sociaux',
+    subtitle: '100 000 logements',
+    description: 'Accès au logement décent pour tous les citoyens',
+    image_url: '/images/housing-project.jpg',
+    button_text: 'En savoir plus',
+    button_link: '/projets/logements-sociaux',
+    order_index: 1
+  },
+  {
+    id: '3',
+    title: 'Smart Cities Sénégal',
+    subtitle: 'Innovation urbaine',
+    description: 'Des villes intelligentes pour un avenir connecté',
+    image_url: '/images/smart-city.jpg',
+    button_text: 'Explorer',
+    button_link: '/projets/smart-cities',
+    order_index: 2
+  }
+]

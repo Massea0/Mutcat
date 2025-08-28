@@ -1,157 +1,192 @@
-"use client"
+'use client'
 
-import React from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, Clock, ArrowRight, TrendingUp } from 'lucide-react'
-import Link from 'next/link'
-import { formatDate } from '@/lib/utils'
-
-// Données de démonstration - à remplacer par des données de Supabase
-const newsItems = [
-  {
-    id: '1',
-    title: 'Lancement du Programme PNALRU : 500 000 logements sur 15 ans',
-    excerpt: 'Le Ministre Balla Moussa Fofana présente le nouveau programme national d\'accès au logement et de rénovation urbaine.',
-    category: 'Logement',
-    image: '/images/news-1.jpg',
-    author: 'Direction Communication',
-    publishedAt: new Date('2025-04-15'),
-    readTime: 5,
-  },
-  {
-    id: '2',
-    title: 'Réforme Foncière : Nouveau Projet de Loi Transmis à l\'Assemblée',
-    excerpt: 'Un cadre juridique plus strict et équitable pour garantir une gestion transparente et rationnelle des terres au Sénégal.',
-    category: 'Législation',
-    image: '/images/news-2.jpg',
-    author: 'Service Juridique',
-    publishedAt: new Date('2025-08-25'),
-    readTime: 3,
-  },
-  {
-    id: '3',
-    title: 'Vision Sénégal 2050 : Les Pôles Territoriaux en Action',
-    excerpt: 'Huit axes de croissance répartis sur l\'ensemble du territoire pour corriger les disparités territoriales.',
-    category: 'Développement',
-    image: '/images/news-3.jpg',
-    author: 'ANAT',
-    publishedAt: new Date('2025-07-07'),
-    readTime: 4,
-  },
-]
-
-const categoryColors: Record<string, string> = {
-  'Logement': 'bg-senegal-green-100 text-senegal-green-700 dark:bg-senegal-green-900/30 dark:text-senegal-green-400',
-  'Législation': 'bg-senegal-yellow-100 text-senegal-yellow-700 dark:bg-senegal-yellow-900/30 dark:text-senegal-yellow-400',
-  'Développement': 'bg-senegal-red-100 text-senegal-red-700 dark:bg-senegal-red-900/30 dark:text-senegal-red-400',
-}
+import { Badge } from '@/components/ui/badge'
+import { Calendar, Clock, ArrowRight, Newspaper } from 'lucide-react'
+import { cmsService, type NewsArticle } from '@/lib/cms/services'
 
 export function NewsSection() {
-  return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* En-tête de section */}
-        <div className="flex items-center justify-between mb-12">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Actualités Récentes
-            </h2>
-            <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-              Restez informé des dernières nouvelles du ministère
-            </p>
+  const [featuredNews, setFeaturedNews] = useState<NewsArticle[]>([])
+  const [latestNews, setLatestNews] = useState<NewsArticle[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    loadNews()
+  }, [])
+
+  const loadNews = async () => {
+    try {
+      const [featured, latest] = await Promise.all([
+        cmsService.getFeaturedNews(1),
+        cmsService.getLatestNews(3)
+      ])
+
+      setFeaturedNews(featured)
+      setLatestNews(latest)
+    } catch (error) {
+      console.error('Error loading news:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })
+  }
+
+  const getCategoryColor = (category: string) => {
+    const colors: Record<string, string> = {
+      'announcement': 'bg-blue-100 text-blue-700',
+      'event': 'bg-purple-100 text-purple-700',
+      'press': 'bg-green-100 text-green-700',
+      'project': 'bg-yellow-100 text-yellow-700',
+      'partnership': 'bg-pink-100 text-pink-700'
+    }
+    return colors[category] || 'bg-gray-100 text-gray-700'
+  }
+
+  const getCategoryLabel = (category: string) => {
+    const labels: Record<string, string> = {
+      'announcement': 'Annonce',
+      'event': 'Événement',
+      'press': 'Presse',
+      'project': 'Projet',
+      'partnership': 'Partenariat'
+    }
+    return labels[category] || category
+  }
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-senegal-green-600 mx-auto"></div>
           </div>
-          <Link href="/actualites">
-            <Button variant="outline" className="group">
-              Toutes les actualités
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
+        </div>
+      </section>
+    )
+  }
+
+  const mainArticle = featuredNews[0] || latestNews[0]
+  const sideArticles = featuredNews.length > 0 
+    ? latestNews.slice(0, 3)
+    : latestNews.slice(1, 4)
+
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Actualités & Événements
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Restez informé des dernières nouvelles du ministère et des projets en cours
+          </p>
         </div>
 
-        {/* Grille d'actualités */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {newsItems.map((item, index) => (
-            <Card
-              key={item.id}
-              className={`group overflow-hidden transition-all duration-300 hover:shadow-2xl ${
-                index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''
-              }`}
-            >
-              {/* Image de couverture */}
-              <div className="relative h-48 lg:h-64 overflow-hidden bg-gradient-to-br from-senegal-green-100 to-senegal-yellow-100">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                {index === 0 && (
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="inline-flex items-center rounded-full bg-senegal-red-500 px-3 py-1 text-xs font-semibold text-white">
-                      <TrendingUp className="mr-1 h-3 w-3" />
-                      À la Une
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <CardHeader>
-                {/* Catégorie */}
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
-                    categoryColors[item.category] || 'bg-gray-100 text-gray-700'
-                  }`}>
-                    {item.category}
-                  </span>
-                  <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                    <Clock className="mr-1 h-3 w-3" />
-                    {item.readTime} min
-                  </div>
+        {/* News Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          {/* Featured Article */}
+          {mainArticle && (
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+              {mainArticle.image_url && (
+                <div 
+                  className="h-64 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${mainArticle.image_url})` }}
+                >
+                  {!mainArticle.image_url.startsWith('http') && (
+                    <div className="h-full bg-gradient-to-br from-senegal-green-100 to-senegal-yellow-100 flex items-center justify-center">
+                      <Newspaper className="h-20 w-20 text-senegal-green-600/20" />
+                    </div>
+                  )}
                 </div>
-
-                {/* Titre */}
-                <CardTitle className={`${
-                  index === 0 ? 'text-2xl' : 'text-xl'
-                } line-clamp-2 group-hover:text-senegal-green-600 transition-colors`}>
-                  <Link href={`/actualites/${item.id}`}>
-                    {item.title}
+              )}
+              <CardHeader>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className={getCategoryColor(mainArticle.category)}>
+                    {getCategoryLabel(mainArticle.category)}
+                  </Badge>
+                  {mainArticle.is_featured && (
+                    <Badge variant="default">À la une</Badge>
+                  )}
+                </div>
+                <CardTitle className="text-2xl">
+                  <Link href={`/actualites/${mainArticle.id}`} className="hover:text-senegal-green-600 transition-colors">
+                    {mainArticle.title}
                   </Link>
                 </CardTitle>
-
-                {/* Description */}
-                <CardDescription className="line-clamp-2 mt-2">
-                  {item.excerpt}
+                <CardDescription className="line-clamp-3">
+                  {mainArticle.excerpt}
                 </CardDescription>
               </CardHeader>
-
               <CardContent>
-                {/* Métadonnées */}
-                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                  <div className="flex items-center">
-                    <Calendar className="mr-1 h-4 w-4" />
-                    {formatDate(item.publishedAt)}
+                <div className="flex items-center gap-4 text-sm text-gray-500">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    <span>{formatDate(mainArticle.published_at)}</span>
                   </div>
-                  <span className="text-xs">{item.author}</span>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>5 min de lecture</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          ))}
+          )}
+
+          {/* Side Articles */}
+          <div className="space-y-4">
+            {sideArticles.map((article) => (
+              <Card key={article.id} className="hover:shadow-lg transition-shadow">
+                <CardContent className="p-4">
+                  <div className="flex gap-4">
+                    {article.image_url ? (
+                      <div 
+                        className="w-24 h-24 bg-cover bg-center rounded-lg flex-shrink-0"
+                        style={{ backgroundImage: `url(${article.image_url})` }}
+                      />
+                    ) : (
+                      <div className="w-24 h-24 bg-gradient-to-br from-senegal-green-100 to-senegal-yellow-100 rounded-lg flex-shrink-0 flex items-center justify-center">
+                        <Newspaper className="h-8 w-8 text-senegal-green-600/30" />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <Badge className={`${getCategoryColor(article.category)} mb-2`} variant="secondary">
+                        {getCategoryLabel(article.category)}
+                      </Badge>
+                      <h3 className="font-semibold mb-1 line-clamp-2">
+                        <Link href={`/actualites/${article.id}`} className="hover:text-senegal-green-600 transition-colors">
+                          {article.title}
+                        </Link>
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {formatDate(article.published_at)}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
-        {/* Barre d'actualités défilante */}
-        <div className="mt-12 rounded-2xl bg-gradient-to-r from-senegal-green-500 via-senegal-yellow-500 to-senegal-red-500 p-1">
-          <div className="rounded-xl bg-white dark:bg-gray-800 p-4">
-            <div className="flex items-center space-x-4">
-              <span className="inline-flex items-center rounded-full bg-senegal-red-100 px-3 py-1 text-sm font-semibold text-senegal-red-700 dark:bg-senegal-red-900/30 dark:text-senegal-red-400">
-                Flash Info
-              </span>
-              <div className="flex-1 overflow-hidden">
-                <div className="animate-marquee whitespace-nowrap">
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    📢 Ouverture des inscriptions pour le programme de logements sociaux 2025 • 
-                    🏗️ Début des travaux du pôle urbain de Diamniadio phase 2 • 
-                    📅 Conférence nationale sur l'urbanisme durable le 15 septembre 2025
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* CTA */}
+        <div className="text-center">
+          <Link href="/actualites">
+            <Button size="lg" variant="outline">
+              Toutes les actualités
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
