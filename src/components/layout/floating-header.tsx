@@ -60,9 +60,11 @@ export function FloatingHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
+    setMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
@@ -269,9 +271,10 @@ export function FloatingHeader() {
             </Link>
 
             {/* Desktop Navigation */}
-            <NavigationMenu className="hidden lg:flex">
-              <NavigationMenuList>
-                {navigationItems.map((item) => (
+            {mounted && (
+              <NavigationMenu className="hidden lg:flex">
+                <NavigationMenuList>
+                  {navigationItems.map((item) => (
                   <NavigationMenuItem key={item.title}>
                     {item.children ? (
                       <>
@@ -324,6 +327,7 @@ export function FloatingHeader() {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
+            )}
 
             {/* Actions */}
             <div className="flex items-center gap-1">
