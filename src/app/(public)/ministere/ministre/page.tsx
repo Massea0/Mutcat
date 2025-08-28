@@ -129,11 +129,14 @@ export default function MinistrePage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-senegal-yellow-500 rounded-2xl transform rotate-6"></div>
                 <div className="relative bg-gray-200 rounded-2xl overflow-hidden shadow-2xl">
-                  <div className="aspect-[3/4] bg-gradient-to-b from-gray-300 to-gray-400 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-32 h-32 bg-gray-500 rounded-full mx-auto mb-4"></div>
-                      <p className="text-gray-600">Photo officielle</p>
-                    </div>
+                  <div className="aspect-[3/4] relative">
+                    <Image
+                      src="/images/portraitministre.png"
+                      alt="Portrait du Ministre"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
                   </div>
                 </div>
               </div>
