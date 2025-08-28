@@ -156,12 +156,17 @@ export default function SettingsPage() {
         .select('*')
         .single();
       
-      if (data) {
+      if (error) {
+        console.log('Site settings table not found or empty, using defaults');
+        // Utiliser les paramètres par défaut
+        setSettings(DEFAULT_SETTINGS);
+      } else if (data) {
         setSettings({ ...DEFAULT_SETTINGS, ...data });
       }
     } catch (error) {
       console.error('Error loading settings:', error);
       // Utiliser les paramètres par défaut en cas d'erreur
+      setSettings(DEFAULT_SETTINGS);
     } finally {
       setLoading(false);
     }
@@ -172,17 +177,40 @@ export default function SettingsPage() {
     setMessage(null);
     
     try {
-      // Sauvegarder dans Supabase
-      const { error } = await supabase
+      // Vérifier si la table existe
+      const { data: existing } = await supabase
         .from('site_settings')
-        .upsert(settings);
+        .select('id')
+        .single();
       
-      if (error) throw error;
+      if (existing) {
+        // Mettre à jour les paramètres existants
+        const { error } = await supabase
+          .from('site_settings')
+          .update(settings)
+          .eq('id', existing.id);
+        
+        if (error) throw error;
+      } else {
+        // Insérer de nouveaux paramètres
+        const { error } = await supabase
+          .from('site_settings')
+          .insert([settings]);
+        
+        if (error) throw error;
+      }
       
       setMessage({ type: 'success', text: 'Paramètres sauvegardés avec succès' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving settings:', error);
-      setMessage({ type: 'error', text: 'Erreur lors de la sauvegarde' });
+      if (error?.code === 'PGRST204' || error?.code === '42P01') {
+        setMessage({ 
+          type: 'error', 
+          text: 'La table des paramètres n\'existe pas. Veuillez contacter l\'administrateur.' 
+        });
+      } else {
+        setMessage({ type: 'error', text: 'Erreur lors de la sauvegarde' });
+      }
     } finally {
       setSaving(false);
     }
