@@ -58,12 +58,12 @@
 - [x] `/ministere/missions` - Missions et Organisation ✅
 - [x] `/ministere/ministre` - Page du Ministre ✅
 - [x] `/ministere/directions` - Directions et Agences ✅
-- [ ] `/ministere/organigramme` - Organigramme interactif
+- [x] `/ministere/organigramme` - Organigramme interactif ✅
 - [ ] `/ministere/historique` - Historique du ministère
 
 ### 2.2 Pages Projets
-- [ ] `/projets` - Liste des projets
-- [ ] `/projets/[id]` - Détail d'un projet
+- [x] `/projets` - Liste des projets ✅
+- [x] `/projets/[id]` - Détail d'un projet ✅
 - [ ] `/projets/pnalru` - Programme National d'Amélioration
 - [ ] `/projets/poles` - Pôles Territoriaux
 - [ ] `/projets/vision-2050` - Vision Sénégal 2050
@@ -245,6 +245,6 @@
 
 ---
 
-📅 **Dernière mise à jour** : 28 Août 2025
+📅 **Dernière mise à jour** : 28 Décembre 2024
 👤 **Responsable** : Équipe MUCTAT Dev
-📊 **Progression globale** : 35%
+📊 **Progression globale** : 45%

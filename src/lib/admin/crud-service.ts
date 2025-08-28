@@ -11,6 +11,7 @@ import type {
   BaseEntity,
   ModelConfig
 } from './types'
+import { AuditService } from './audit-service'
 
 export class CrudService<T extends BaseEntity> implements CrudOperations<T> {
   private supabase = createClient()
