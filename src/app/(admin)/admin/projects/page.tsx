@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Plus, Download, Upload } from 'lucide-react'
+import { Plus, Download, Upload, Building } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function ProjectsAdminPage() {
