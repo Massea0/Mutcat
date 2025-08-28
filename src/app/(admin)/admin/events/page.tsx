@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { DataTable } from '@/components/admin/DataTable'
-import { DynamicForm } from '@/components/admin/DynamicForm'
+import { SafeDynamicForm } from '@/components/admin/SafeDynamicForm'
 import { eventsModel } from '@/lib/admin/models/events'
 import { CrudService } from '@/lib/admin/crud-service'
 import { Button } from '@/components/ui/button'
@@ -107,7 +107,7 @@ export default function EventsPage() {
               Formulaire pour {editingItem ? 'modifier' : 'créer'} un événement
             </p>
           </DialogHeader>
-          <DynamicForm
+          <SafeDynamicForm
             model={eventsModel}
             initialData={editingItem}
             onSubmit={handleSubmit}

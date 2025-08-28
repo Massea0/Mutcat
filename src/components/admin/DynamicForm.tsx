@@ -161,15 +161,19 @@ export function DynamicForm({
     defaultValues: initialData
   })
   
-  // Watch for field dependencies
-  const watchedFields = watch()
+  // Watch for field dependencies - using specific fields to avoid re-renders
+  const dependentFields = model.fields
+    .filter(f => f.dependsOn)
+    .map(f => f.dependsOn!.field)
+  
+  const watchedValues = dependentFields.length > 0 ? watch(dependentFields) : {}
   
   useEffect(() => {
     const newVisibility: Record<string, boolean> = {}
     
     model.fields.forEach(field => {
       if (field.dependsOn) {
-        const dependentValue = watchedFields[field.dependsOn.field]
+        const dependentValue = getValues(field.dependsOn.field)
         let shouldShow = false
         
         switch (field.dependsOn.condition) {
@@ -199,8 +203,14 @@ export function DynamicForm({
       }
     })
     
-    setFieldVisibility(newVisibility)
-  }, [watchedFields, model.fields])
+    setFieldVisibility(prev => {
+      // Only update if actually changed to avoid re-renders
+      const hasChanged = Object.keys(newVisibility).some(
+        key => prev[key] !== newVisibility[key]
+      )
+      return hasChanged ? newVisibility : prev
+    })
+  }, [watchedValues, model.fields, getValues])
   
   const onFormSubmit = async (data: any) => {
     setLoading(true)
