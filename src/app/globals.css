@@ -163,4 +163,61 @@
   .animate-marquee {
     animation: marquee 20s linear infinite;
   }
+  
+  /* Floating header animations */
+  @keyframes float-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -20px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+  .floating-header {
+    animation: float-in 0.5s ease-out;
+  }
+  
+  /* Glass morphism effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .glass-effect-dark {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Smooth transitions for navbar */
+  .navbar-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Hover effects for menu items */
+  .menu-item-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .menu-item-hover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00853F, #FDEF42, #E31E24);
+    transition: width 0.3s ease;
+  }
+  
+  .menu-item-hover:hover::before {
+    width: 100%;
+  }
 }

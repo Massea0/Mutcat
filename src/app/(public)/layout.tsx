@@ -1,7 +1,7 @@
 'use client'
 
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { FloatingHeader } from "@/components/layout/floating-header";
+import { ModernFooter } from "@/components/layout/modern-footer";
 
 export default function PublicLayout({
   children,
@@ -11,11 +11,11 @@ export default function PublicLayout({
   return (
     <>
       <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1 pt-20">
+        <FloatingHeader />
+        <main className="flex-1">
           {children}
         </main>
-        <Footer />
+        <ModernFooter />
       </div>
     </>
   );
