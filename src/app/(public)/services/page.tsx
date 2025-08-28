@@ -12,6 +12,7 @@ import {
   FileSignature,
   BookOpen,
   Calculator,
+  Calendar,
   Home,
   Building,
   MapPin,

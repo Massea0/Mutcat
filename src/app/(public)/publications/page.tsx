@@ -29,11 +29,11 @@ import { createClient } from '@/lib/supabase/client'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from 'sonner'
 
-// Lazy load heavy components
-const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
-  ssr: false,
-  loading: () => <Skeleton className="h-96 w-full" />
-})
+// Lazy load heavy components (à implémenter plus tard)
+// const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
+//   ssr: false,
+//   loading: () => <Skeleton className="h-96 w-full" />
+// })
 
 function PublicationSkeleton() {
   return (

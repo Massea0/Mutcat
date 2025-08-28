@@ -27,10 +27,10 @@ export function ModernFooter() {
       { title: 'Organigramme', href: '/ministere/organigramme' },
     ],
     services: [
-      { title: 'Publications', href: '/services/publications' },
-      { title: 'Appels d\'offres', href: '/services/appels-offres' },
+      { title: 'Publications', href: '/publications' },
+      { title: 'Appels d\'offres', href: '/appels-offres' },
       { title: 'Formulaires', href: '/services/formulaires' },
-      { title: 'FAQ', href: '/services/faq' },
+      { title: 'FAQ', href: '/faq' },
     ],
     projets: [
       { title: 'Projets en cours', href: '/projets?status=in_progress' },

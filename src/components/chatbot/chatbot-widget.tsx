@@ -4,7 +4,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { MessageCircle, X, Send, Bot, User, Loader2 } from 'lucide-react'
-import { generateSessionId } from '@/lib/utils'
+// import { generateSessionId } from '@/lib/utils'
+
+// Fonction pour générer un ID de session
+function generateSessionId() {
+  return `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+}
 
 interface Message {
   id: string
