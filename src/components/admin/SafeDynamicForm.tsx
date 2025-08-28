@@ -123,7 +123,7 @@ export function SafeDynamicForm({
       case 'slug':
         return (
           <div key={field.name} className="space-y-2">
-            <Label htmlFor={field.name}>
+            <Label htmlFor={field.name} className="text-sm font-medium text-gray-700">
               {field.label}
               {field.required && <span className="text-red-500 ml-1">*</span>}
             </Label>
@@ -131,8 +131,12 @@ export function SafeDynamicForm({
               id={field.name}
               type={field.type === 'number' ? 'number' : 'text'}
               placeholder={field.placeholder}
+              className="w-full"
               {...register(field.name)}
             />
+            {field.helper && (
+              <p className="text-xs text-gray-500">{field.helper}</p>
+            )}
             {error && (
               <p className="text-sm text-red-500">{error.message as string}</p>
             )}
@@ -141,8 +145,8 @@ export function SafeDynamicForm({
         
       case 'textarea':
         return (
-          <div key={field.name} className="space-y-2">
-            <Label htmlFor={field.name}>
+          <div key={field.name} className="space-y-2 col-span-2">
+            <Label htmlFor={field.name} className="text-sm font-medium text-gray-700">
               {field.label}
               {field.required && <span className="text-red-500 ml-1">*</span>}
             </Label>
@@ -150,6 +154,7 @@ export function SafeDynamicForm({
               id={field.name}
               placeholder={field.placeholder}
               rows={field.rows || 4}
+              className="w-full"
               {...register(field.name)}
             />
             {error && (
@@ -276,13 +281,24 @@ export function SafeDynamicForm({
     }
   }, [register, control, errors])
   
+  // Organiser les champs par colonnes pour une meilleure mise en page
+  const leftColumnFields = model.fields.filter((_, index) => index % 2 === 0)
+  const rightColumnFields = model.fields.filter((_, index) => index % 2 === 1)
+  
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {model.fields.map(renderField)}
+      <div className="max-h-[60vh] overflow-y-auto px-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-4">
+          <div className="space-y-4">
+            {leftColumnFields.map(renderField)}
+          </div>
+          <div className="space-y-4">
+            {rightColumnFields.map(renderField)}
+          </div>
+        </div>
       </div>
       
-      <div className="flex justify-end space-x-4 pt-6 border-t">
+      <div className="flex justify-end space-x-4 pt-6 border-t sticky bottom-0 bg-white">
         {onCancel && (
           <Button
             type="button"

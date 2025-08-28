@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { DataTable } from '@/components/admin/DataTable'
-import { DynamicForm } from '@/components/admin/DynamicForm'
+import { SimpleDynamicForm } from '@/components/admin/SimpleDynamicForm'
 import { projectsModel } from '@/lib/admin/models'
 import { CrudService } from '@/lib/admin/crud-service'
 import {
@@ -183,7 +183,7 @@ export default function ProjectsAdminPage() {
 
       {/* Form Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="dialog-description">
+        <DialogContent className="max-w-3xl" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {selectedItem?.id ? 'Modifier le projet' : 'Nouveau projet'}
@@ -195,7 +195,7 @@ export default function ProjectsAdminPage() {
             </DialogDescription>
           </DialogHeader>
           
-          <DynamicForm
+          <SimpleDynamicForm
             model={projectsModel}
             initialData={selectedItem}
             onSubmit={handleSubmit}
