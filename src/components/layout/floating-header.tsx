@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { LogoImage } from '@/components/ui/logo-image'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -234,13 +235,11 @@ export function FloatingHeader() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2 group">
-              <img 
+              <LogoImage 
                 src="/logo.png" 
+                fallbackSrc="/logo-placeholder.svg"
                 alt="MUCTAT Logo" 
                 className="h-10 w-auto transition-transform group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/logo-placeholder.svg';
-                }}
               />
               <div className="hidden sm:block">
                 <h1 className="text-sm font-bold bg-gradient-to-r from-senegal-green-600 to-senegal-green-500 bg-clip-text text-transparent">
@@ -291,16 +290,16 @@ export function FloatingHeader() {
                         </NavigationMenuContent>
                       </>
                     ) : (
-                      <Link href={item.href || '#'} legacyBehavior passHref>
-                        <NavigationMenuLink className={cn(
+                      <NavigationMenuLink asChild>
+                        <Link href={item.href || '#'} className={cn(
                           navigationMenuTriggerStyle(),
                           "bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50",
                           pathname === item.href && "bg-accent/50"
                         )}>
                           <item.icon className="h-4 w-4 mr-2" />
                           {item.title}
-                        </NavigationMenuLink>
-                      </Link>
+                        </Link>
+                      </NavigationMenuLink>
                     )}
                   </NavigationMenuItem>
                 ))}

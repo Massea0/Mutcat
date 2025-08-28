@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { LogoImage } from '@/components/ui/logo-image'
 import { 
   Facebook, 
   Twitter, 
@@ -90,13 +93,11 @@ export function ModernFooter() {
           {/* Logo & Description */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-3 mb-6">
-              <img 
+              <LogoImage 
                 src="/logo.png" 
+                fallbackSrc="/logo-placeholder.svg"
                 alt="MUCTAT Logo" 
                 className="h-12 w-auto"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/logo-placeholder.svg';
-                }}
               />
               <div>
                 <h2 className="text-2xl font-bold">MUCTAT</h2>
