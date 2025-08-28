@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   description: "Site officiel du Ministère de l'Urbanisme, des Collectivités Territoriales et de l'Aménagement des Territoires de la République du Sénégal",
   keywords: "MUCTAT, urbanisme, Sénégal, aménagement territoire, collectivités territoriales, Dakar",
   authors: [{ name: "MUCTAT" }],
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: "MUCTAT - Ministère de l'Urbanisme du Sénégal",
     description: "Site officiel du Ministère de l'Urbanisme, des Collectivités Territoriales et de l'Aménagement des Territoires",
