@@ -1,5 +1,3 @@
-'use client'
-
 import { FloatingHeader } from "@/components/layout/floating-header";
 import { ModernFooter } from "@/components/layout/modern-footer";
 

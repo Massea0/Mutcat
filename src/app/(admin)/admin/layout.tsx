@@ -102,7 +102,7 @@ export default function AdminLayout({
       .eq('id', user.id)
       .single()
     
-    if (!userData || !['admin', 'editor'].includes(userData.role)) {
+    if (!userData || !['admin', 'editor'].includes((userData as any).role)) {
       router.push('/')
       return
     }
