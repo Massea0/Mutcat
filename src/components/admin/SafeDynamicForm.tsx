@@ -77,8 +77,13 @@ export function SafeDynamicForm({
       
       // Apply validation rules
       if (field.required && field.type !== 'checkbox') {
-        fieldSchema = fieldSchema.min(1, 'Ce champ est requis')
-      } else if (!field.required && field.type !== 'checkbox') {
+        // Pour les strings, utiliser min(1), pour les autres types, juste required
+        if (field.type === 'text' || field.type === 'email' || field.type === 'url' || 
+            field.type === 'slug' || field.type === 'textarea' || field.type === 'richtext' || 
+            field.type === 'select') {
+          fieldSchema = fieldSchema.min(1, 'Ce champ est requis')
+        }
+      } else if (!field.required) {
         fieldSchema = fieldSchema.optional().nullable()
       }
       
