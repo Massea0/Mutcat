@@ -134,10 +134,11 @@ export const projectsModel: ModelConfig = {
     export: true,
     import: true,
     bulkActions: true,
-    trash: true,
+    trash: false,  // Désactivé car la colonne deleted_at n'existe pas
     audit: true,
     duplicate: true,
-    preview: true
+    preview: true,
+    softDelete: false
   },
   actions: [
     {

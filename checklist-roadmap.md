@@ -79,7 +79,8 @@
 - [ ] `/services/formulaires` - Formulaires administratifs
 
 ### 2.4 Actualités & Médias
-- [ ] `/actualites/[id]` - Détail d'une actualité
+- [x] `/actualites` - Page liste des actualités ✅
+- [x] `/actualites/[id]` - Détail d'une actualité ✅
 - [ ] `/evenements` - Calendrier des événements
 - [ ] `/medias/photos` - Galerie photos
 - [ ] `/medias/videos` - Galerie vidéos

@@ -184,7 +184,8 @@ export class CrudService<T extends BaseEntity> implements CrudOperations<T> {
       let query = this.supabase.from(this.tableName).select('*', { count: 'exact' })
 
       // Apply soft delete filter if trash feature is enabled
-      if (this.config.features?.trash) {
+      // Only apply if the column exists (check can be done via config)
+      if (this.config.features?.trash && this.config.features?.softDelete !== false) {
         query = query.is('deleted_at', null)
       }
 
