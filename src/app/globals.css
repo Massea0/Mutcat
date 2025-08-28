@@ -201,23 +201,68 @@
   }
   
   /* Hover effects for menu items */
-  .menu-item-hover {
-    position: relative;
-    overflow: hidden;
+.menu-item-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item-hover::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00853F, #FDEF42, #E31E24);
+  transition: width 0.3s ease;
+}
+
+.menu-item-hover:hover::before {
+  width: 100%;
+}
+
+/* Shimmer animation for lazy loading */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
   }
-  
-  .menu-item-hover::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #00853F, #FDEF42, #E31E24);
-    transition: width 0.3s ease;
+  100% {
+    transform: translateX(100%);
   }
-  
-  .menu-item-hover:hover::before {
-    width: 100%;
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+/* Skeleton pulse animation override for better performance */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-skeleton {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 }
