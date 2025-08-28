@@ -298,7 +298,7 @@ export default function SettingsPage() {
                   <Label htmlFor="site_name">Nom du site</Label>
                   <Input
                     id="site_name"
-                    value={settings.site_name}
+                    value={settings.site_name || ''}
                     onChange={(e) => updateSetting('site_name', e.target.value)}
                     placeholder="Nom du site"
                   />
@@ -307,7 +307,7 @@ export default function SettingsPage() {
                   <Label htmlFor="site_url">URL du site</Label>
                   <Input
                     id="site_url"
-                    value={settings.site_url}
+                    value={settings.site_url || ''}
                     onChange={(e) => updateSetting('site_url', e.target.value)}
                     placeholder="https://example.com"
                   />
@@ -329,7 +329,7 @@ export default function SettingsPage() {
                 <Label htmlFor="site_keywords">Mots-clés SEO</Label>
                 <Input
                   id="site_keywords"
-                  value={settings.site_keywords}
+                  value={settings.site_keywords || ''}
                   onChange={(e) => updateSetting('site_keywords', e.target.value)}
                   placeholder="mot1, mot2, mot3"
                 />
@@ -350,7 +350,7 @@ export default function SettingsPage() {
                   <Label htmlFor="social_facebook">Facebook</Label>
                   <Input
                     id="social_facebook"
-                    value={settings.social_facebook}
+                    value={settings.social_facebook || ''}
                     onChange={(e) => updateSetting('social_facebook', e.target.value)}
                     placeholder="https://facebook.com/..."
                   />
@@ -359,7 +359,7 @@ export default function SettingsPage() {
                   <Label htmlFor="social_twitter">Twitter</Label>
                   <Input
                     id="social_twitter"
-                    value={settings.social_twitter}
+                    value={settings.social_twitter || ''}
                     onChange={(e) => updateSetting('social_twitter', e.target.value)}
                     placeholder="https://twitter.com/..."
                   />
@@ -368,7 +368,7 @@ export default function SettingsPage() {
                   <Label htmlFor="social_linkedin">LinkedIn</Label>
                   <Input
                     id="social_linkedin"
-                    value={settings.social_linkedin}
+                    value={settings.social_linkedin || ''}
                     onChange={(e) => updateSetting('social_linkedin', e.target.value)}
                     placeholder="https://linkedin.com/..."
                   />
@@ -377,7 +377,7 @@ export default function SettingsPage() {
                   <Label htmlFor="social_youtube">YouTube</Label>
                   <Input
                     id="social_youtube"
-                    value={settings.social_youtube}
+                    value={settings.social_youtube || ''}
                     onChange={(e) => updateSetting('social_youtube', e.target.value)}
                     placeholder="https://youtube.com/..."
                   />
@@ -404,7 +404,7 @@ export default function SettingsPage() {
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <Input
                       id="contact_email"
-                      value={settings.contact_email}
+                      value={settings.contact_email || ''}
                       onChange={(e) => updateSetting('contact_email', e.target.value)}
                       placeholder="contact@example.com"
                       className="pl-10"
@@ -417,7 +417,7 @@ export default function SettingsPage() {
                     <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <Input
                       id="contact_phone"
-                      value={settings.contact_phone}
+                      value={settings.contact_phone || ''}
                       onChange={(e) => updateSetting('contact_phone', e.target.value)}
                       placeholder="+221 33 123 45 67"
                       className="pl-10"
@@ -445,7 +445,7 @@ export default function SettingsPage() {
                 <Label htmlFor="contact_hours">Horaires d'ouverture</Label>
                 <Input
                   id="contact_hours"
-                  value={settings.contact_hours}
+                  value={settings.contact_hours || ''}
                   onChange={(e) => updateSetting('contact_hours', e.target.value)}
                   placeholder="Lundi - Vendredi: 8h00 - 17h00"
                 />
@@ -469,7 +469,7 @@ export default function SettingsPage() {
                   <Label htmlFor="smtp_host">Serveur SMTP</Label>
                   <Input
                     id="smtp_host"
-                    value={settings.smtp_host}
+                    value={settings.smtp_host || ''}
                     onChange={(e) => updateSetting('smtp_host', e.target.value)}
                     placeholder="smtp.gmail.com"
                   />
@@ -479,7 +479,7 @@ export default function SettingsPage() {
                   <Input
                     id="smtp_port"
                     type="number"
-                    value={settings.smtp_port}
+                    value={settings.smtp_port || 587}
                     onChange={(e) => updateSetting('smtp_port', parseInt(e.target.value))}
                     placeholder="587"
                   />
@@ -488,7 +488,7 @@ export default function SettingsPage() {
                   <Label htmlFor="smtp_user">Utilisateur</Label>
                   <Input
                     id="smtp_user"
-                    value={settings.smtp_user}
+                    value={settings.smtp_user || ''}
                     onChange={(e) => updateSetting('smtp_user', e.target.value)}
                     placeholder="user@gmail.com"
                   />
@@ -498,7 +498,7 @@ export default function SettingsPage() {
                   <Input
                     id="smtp_password"
                     type="password"
-                    value={settings.smtp_password}
+                    value={settings.smtp_password || ''}
                     onChange={(e) => updateSetting('smtp_password', e.target.value)}
                     placeholder="••••••••"
                   />
@@ -575,7 +575,7 @@ export default function SettingsPage() {
                   <Input
                     id="password_min_length"
                     type="number"
-                    value={settings.password_min_length}
+                    value={settings.password_min_length || 8}
                     onChange={(e) => updateSetting('password_min_length', parseInt(e.target.value))}
                     min="6"
                     max="32"
@@ -586,7 +586,7 @@ export default function SettingsPage() {
                   <Input
                     id="max_login_attempts"
                     type="number"
-                    value={settings.max_login_attempts}
+                    value={settings.max_login_attempts || 5}
                     onChange={(e) => updateSetting('max_login_attempts', parseInt(e.target.value))}
                     min="3"
                     max="10"
