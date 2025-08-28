@@ -577,9 +577,10 @@ export default function MediaAdminPage() {
 
       {/* File Details Dialog */}
       <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>Détails du fichier</DialogTitle>
+            <p id="dialog-description" className="sr-only">Formulaire de gestion</p>
           </DialogHeader>
           
           {selectedFile && (

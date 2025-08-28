@@ -455,7 +455,7 @@ export default function UsersAdminPage() {
 
       {/* User Form Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {selectedUser?.id ? 'Modifier l\'utilisateur' : 'Nouvel utilisateur'}
@@ -481,7 +481,7 @@ export default function UsersAdminPage() {
 
       {/* Permissions Dialog */}
       <Dialog open={isPermissionsOpen} onOpenChange={setIsPermissionsOpen}>
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>Gérer les permissions</DialogTitle>
             <DialogDescription>

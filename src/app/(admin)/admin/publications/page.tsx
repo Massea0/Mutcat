@@ -98,11 +98,12 @@ export default function PublicationsPage() {
       />
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {editingItem ? 'Modifier la publication' : 'Nouvelle publication'}
             </DialogTitle>
+            <p id="dialog-description" className="sr-only">Formulaire de gestion</p>
           </DialogHeader>
           <DynamicForm
             model={publicationsModel}

@@ -98,11 +98,14 @@ export default function EventsPage() {
       />
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="event-form-description">
           <DialogHeader>
             <DialogTitle>
               {editingItem ? 'Modifier l\'événement' : 'Nouvel événement'}
             </DialogTitle>
+            <p id="event-form-description" className="sr-only">
+              Formulaire pour {editingItem ? 'modifier' : 'créer'} un événement
+            </p>
           </DialogHeader>
           <DynamicForm
             model={eventsModel}

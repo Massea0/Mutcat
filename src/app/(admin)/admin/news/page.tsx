@@ -354,7 +354,7 @@ export default function NewsAdminPage() {
 
       {/* Form Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {selectedItem?.id ? 'Modifier l\'article' : 'Nouvel article'}

@@ -66,7 +66,6 @@ export default function EvenementsPage() {
       let query = supabase
         .from('events')
         .select('*')
-        .eq('status', 'published')
 
       // Filtres par onglet
       const now = new Date().toISOString()

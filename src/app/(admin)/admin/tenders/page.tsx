@@ -98,11 +98,12 @@ export default function TendersPage() {
       />
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {editingItem ? 'Modifier l\'appel d\'offre' : 'Nouvel appel d\'offre'}
             </DialogTitle>
+            <p id="dialog-description" className="sr-only">Formulaire de gestion</p>
           </DialogHeader>
           <DynamicForm
             model={tendersModel}
