@@ -197,7 +197,7 @@ export default function ProjectsAdminPage() {
           
           <SimpleDynamicForm
             model={projectsModel}
-            initialData={selectedItem}
+            initialData={selectedItem || {}}
             onSubmit={handleSubmit}
             onCancel={() => {
               setIsFormOpen(false)

@@ -28,7 +28,7 @@ export function SimpleDynamicForm({
   onCancel
 }: SimpleDynamicFormProps) {
   const [loading, setLoading] = useState(false)
-  const [formData, setFormData] = useState<any>(initialData)
+  const [formData, setFormData] = useState<any>(initialData || {})
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleChange = (name: string, value: any) => {
@@ -43,7 +43,7 @@ export function SimpleDynamicForm({
     const newErrors: Record<string, string> = {}
     
     model.fields.forEach(field => {
-      if (field.required && !formData[field.name]) {
+      if (field.required && (!formData || !formData[field.name])) {
         newErrors[field.name] = 'Ce champ est requis'
       }
     })
@@ -72,7 +72,7 @@ export function SimpleDynamicForm({
       <div className="max-h-[60vh] overflow-y-auto pr-2">
         <div className="space-y-4">
           {model.fields.map((field) => {
-            const value = formData[field.name] || ''
+            const value = formData?.[field.name] || ''
             const error = errors[field.name]
             
             return (
