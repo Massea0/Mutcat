@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test CSS - MUCTAT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #00923f;
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            background: linear-gradient(90deg, #00923f 0%, #ffb800 50%, #d91010 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 30px 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .colors {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .color-box {
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .color-box:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+        .green { background: #00923f; }
+        .yellow { background: #ffb800; color: #333; }
+        .red { background: #d91010; }
+        .info {
+            background: #f0f9ff;
+            border-left: 4px solid #00923f;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        .info h2 {
+            color: #00923f;
+            margin-top: 0;
+        }
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+        .check-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .check-list li:before {
+            content: "✅ ";
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(90deg, #00923f 0%, #ffb800 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,146,63,0.3);
+        }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,146,63,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 FÉLICITATIONS !</h1>
+        
+        <div class="status">
+            ✨ Le CSS fonctionne parfaitement ! ✨
+        </div>
+        
+        <div class="colors">
+            <div class="color-box green">VERT<br>Sénégal</div>
+            <div class="color-box yellow">JAUNE<br>Sénégal</div>
+            <div class="color-box red">ROUGE<br>Sénégal</div>
+        </div>
+        
+        <div class="info">
+            <h2>✅ Plateforme MUCTAT - État du système</h2>
+            <ul class="check-list">
+                <li>Serveur Next.js : Opérationnel</li>
+                <li>Tailwind CSS : Compilé et chargé</li>
+                <li>PostCSS : Configuré correctement</li>
+                <li>Couleurs du Sénégal : Intégrées</li>
+                <li>Design System : Prêt</li>
+                <li>Base de données Supabase : En attente de configuration</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h2>🚀 Pages disponibles</h2>
+            <ul class="check-list">
+                <li>Page d'accueil : <a href="http://localhost:3000">http://localhost:3000</a></li>
+                <li>Page de test : <a href="http://localhost:3000/test">http://localhost:3000/test</a></li>
+                <li>Actualités : <a href="http://localhost:3000/actualites">http://localhost:3000/actualites</a></li>
+                <li>Contact : <a href="http://localhost:3000/contact">http://localhost:3000/contact</a></li>
+                <li>Connexion : <a href="http://localhost:3000/auth/login">http://localhost:3000/auth/login</a></li>
+                <li>Admin : <a href="http://localhost:3000/admin">http://localhost:3000/admin</a></li>
+            </ul>
+        </div>
+        
+        <div class="cta">
+            <a href="http://localhost:3000" class="button">Visiter le site MUCTAT →</a>
+        </div>
+    </div>
+</body>
+</html>
