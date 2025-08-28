@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { LogoImage } from '@/components/ui/logo-image'
+import { GlobalSearch } from '@/components/search/global-search'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -57,6 +58,7 @@ export function FloatingHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -217,8 +219,24 @@ export function FloatingHeader() {
     document.documentElement.classList.toggle('dark')
   }
 
+  // Keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault()
+        setIsSearchOpen(true)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
   return (
     <>
+      {/* Global Search Modal */}
+      <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      
       {/* Spacer pour éviter que le contenu passe sous la navbar */}
       <div className="h-16"></div>
       
@@ -312,10 +330,14 @@ export function FloatingHeader() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 w-8 p-0"
+                className="rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 px-2 gap-1"
                 aria-label="Rechercher"
+                onClick={() => setIsSearchOpen(true)}
               >
                 <Search className="h-4 w-4" />
+                <kbd className="hidden sm:inline-flex px-1 py-0.5 text-xs bg-gray-100 dark:bg-gray-800 border rounded">
+                  ⌘K
+                </kbd>
               </Button>
 
               {/* Language Switcher */}

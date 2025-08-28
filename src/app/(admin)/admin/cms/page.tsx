@@ -21,7 +21,8 @@ import {
   Star,
   StarOff
 } from 'lucide-react'
-import { cmsService, storageService } from '@/lib/cms/services'
+import { cmsService } from '@/lib/cms/services'
+import { storageService } from '@/lib/supabase/storage'
 import { toast } from 'sonner'
 
 export default function CMSPage() {

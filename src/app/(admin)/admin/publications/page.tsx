@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { toast } from 'sonner'
 
 export default function PublicationsPage() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
