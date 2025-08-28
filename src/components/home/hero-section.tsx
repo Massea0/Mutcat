@@ -11,21 +11,21 @@ const slides = [
     title: "Vision Sénégal 2050",
     subtitle: "Bâtir l'avenir urbain du Sénégal",
     description: "Un développement territorial équilibré et durable pour tous les Sénégalais",
-    image: "/images/hero-1.jpg",
+    image: "https://images.unsplash.com/photo-1590330297626-d7aff25a0431?w=1600&h=900&fit=crop",
     cta: { text: "Découvrir la Vision", href: "/projets/vision-2050" }
   },
   {
     title: "Programme PNALRU",
     subtitle: "500 000 logements sur 15 ans",
     description: "Accès au logement décent et rénovation urbaine pour tous",
-    image: "/images/hero-2.jpg",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&h=900&fit=crop",
     cta: { text: "En savoir plus", href: "/projets/pnalru" }
   },
   {
     title: "Pôles Territoriaux",
     subtitle: "8 axes de croissance nationale",
     description: "Décentralisation et développement économique équilibré",
-    image: "/images/hero-3.jpg",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop",
     cta: { text: "Explorer les pôles", href: "/projets/poles" }
   }
 ]
@@ -45,12 +45,17 @@ export function HeroSection() {
       {/* Image de fond avec overlay */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent z-10" />
-        <div 
-          className="h-full w-full bg-cover bg-center transition-all duration-1000"
-          style={{
-            backgroundImage: `url('/images/placeholder.svg')`,
-          }}
-        />
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 h-full w-full bg-cover bg-center transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url('${slide.image}')`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Contenu */}
