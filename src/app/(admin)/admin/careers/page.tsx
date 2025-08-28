@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { DataTable } from '@/components/admin/DataTable'
-import { DynamicForm } from '@/components/admin/DynamicForm'
+import { SimpleDynamicForm } from '@/components/admin/SimpleDynamicForm'
 import { careersModel } from '@/lib/admin/models/careers'
 import { CrudService } from '@/lib/admin/crud-service'
 import { Button } from '@/components/ui/button'
@@ -98,16 +98,16 @@ export default function CareersPage() {
       />
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="dialog-description">
+        <DialogContent className="max-w-3xl" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {editingItem ? 'Modifier l\'offre d\'emploi' : 'Nouvelle offre d\'emploi'}
             </DialogTitle>
             <p id="dialog-description" className="sr-only">Formulaire de gestion</p>
           </DialogHeader>
-          <DynamicForm
+          <SimpleDynamicForm
             model={careersModel}
-            initialData={editingItem}
+            initialData={editingItem || {}}
             onSubmit={handleSubmit}
             onCancel={() => setIsFormOpen(false)}
           />

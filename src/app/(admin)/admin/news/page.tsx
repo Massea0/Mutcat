@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { DataTable } from '@/components/admin/DataTable'
-import { DynamicForm } from '@/components/admin/DynamicForm'
+import { SimpleDynamicForm } from '@/components/admin/SimpleDynamicForm'
 import { newsModel } from '@/lib/admin/models'
 import { CrudService } from '@/lib/admin/crud-service'
 import {
@@ -354,7 +354,7 @@ export default function NewsAdminPage() {
 
       {/* Form Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="dialog-description">
+        <DialogContent className="max-w-3xl" aria-describedby="dialog-description">
           <DialogHeader>
             <DialogTitle>
               {selectedItem?.id ? 'Modifier l\'article' : 'Nouvel article'}
@@ -366,9 +366,9 @@ export default function NewsAdminPage() {
             </DialogDescription>
           </DialogHeader>
           
-          <DynamicForm
+          <SimpleDynamicForm
             model={newsModel}
-            initialData={selectedItem}
+            initialData={selectedItem || {}}
             onSubmit={handleSubmit}
             onCancel={() => {
               setIsFormOpen(false)

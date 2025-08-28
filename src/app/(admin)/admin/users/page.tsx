@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { DataTable } from '@/components/admin/DataTable'
-import { DynamicForm } from '@/components/admin/DynamicForm'
+import { SimpleDynamicForm } from '@/components/admin/SimpleDynamicForm'
 import { usersModel } from '@/lib/admin/models'
 import { CrudService } from '@/lib/admin/crud-service'
 import {
@@ -467,7 +467,7 @@ export default function UsersAdminPage() {
             </DialogDescription>
           </DialogHeader>
           
-          <DynamicForm
+          <SimpleDynamicForm
             model={usersModel}
             initialData={selectedUser}
             onSubmit={handleSubmit}

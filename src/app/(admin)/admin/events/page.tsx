@@ -109,7 +109,7 @@ export default function EventsPage() {
           </DialogHeader>
           <SafeDynamicForm
             model={eventsModel}
-            initialData={editingItem}
+            initialData={editingItem || {}}
             onSubmit={handleSubmit}
             onCancel={() => setIsFormOpen(false)}
           />
