@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { LogoImage } from '@/components/ui/logo-image'
 import { GlobalSearch } from '@/components/search/global-search'
+import { LanguageSelector } from '@/components/ui/language-selector'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -341,14 +342,7 @@ export function FloatingHeader() {
               </Button>
 
               {/* Language Switcher */}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 h-8 w-8 p-0 hidden sm:flex"
-                aria-label="Changer de langue"
-              >
-                <Globe className="h-4 w-4" />
-              </Button>
+              <LanguageSelector className="hidden sm:flex" />
 
               {/* Dark Mode Toggle */}
               <Button

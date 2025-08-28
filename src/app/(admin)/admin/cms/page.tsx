@@ -26,11 +26,11 @@ import { storageService } from '@/lib/supabase/storage'
 import { toast } from 'sonner'
 
 export default function CMSPage() {
-  const [heroSliders, setHeroSliders] = useState([])
-  const [statistics, setStatistics] = useState([])
-  const [partners, setPartners] = useState([])
-  const [featuredNews, setFeaturedNews] = useState([])
-  const [featuredProjects, setFeaturedProjects] = useState([])
+  const [heroSliders, setHeroSliders] = useState<any[]>([])
+  const [statistics, setStatistics] = useState<any[]>([])
+  const [partners, setPartners] = useState<any[]>([])
+  const [featuredNews, setFeaturedNews] = useState<any[]>([])
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

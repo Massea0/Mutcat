@@ -14,7 +14,7 @@ export default function EventsPage() {
   const [data, setData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [editingItem, setEditingItem] = useState(null)
+  const [editingItem, setEditingItem] = useState<any>(null)
   const crudService = new CrudService(eventsModel)
 
   useEffect(() => {
@@ -93,11 +93,8 @@ export default function EventsPage() {
 
       <DataTable
         model={eventsModel}
-        data={data}
-        loading={loading}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        onRefresh={loadData}
       />
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>

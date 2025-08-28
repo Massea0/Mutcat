@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'sonner';
 import { QueryProvider } from '@/providers/query-provider'
+import { I18nProvider } from '@/lib/i18n/context'
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -87,10 +88,12 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <QueryProvider>
-          {children}
-        </QueryProvider>
-        <Toaster position="top-right" richColors />
+        <I18nProvider>
+          <QueryProvider>
+            {children}
+          </QueryProvider>
+          <Toaster position="top-right" richColors />
+        </I18nProvider>
       </body>
     </html>
   );

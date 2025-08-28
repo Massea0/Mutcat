@@ -204,7 +204,7 @@ export function ModernFooter() {
               <Link href="/mentions-legales" className="text-gray-400 hover:text-white transition-colors">
                 Mentions légales
               </Link>
-              <Link href="/politique-confidentialite" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/confidentialite" className="text-gray-400 hover:text-white transition-colors">
                 Confidentialité
               </Link>
               <Link href="/accessibilite" className="text-gray-400 hover:text-white transition-colors">

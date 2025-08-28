@@ -14,7 +14,7 @@ export default function PublicationsPage() {
   const [data, setData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [editingItem, setEditingItem] = useState(null)
+  const [editingItem, setEditingItem] = useState<any>(null)
   const crudService = new CrudService(publicationsModel)
 
   useEffect(() => {
@@ -93,11 +93,8 @@ export default function PublicationsPage() {
 
       <DataTable
         model={publicationsModel}
-        data={data}
-        loading={loading}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        onRefresh={loadData}
       />
 
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
