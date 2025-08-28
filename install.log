@@ -1,0 +1,10 @@
+nohup: ignoring input
+npm warn deprecated @supabase/auth-helpers-shared@0.7.0: This package is now deprecated - please use the @supabase/ssr package instead.
+npm warn deprecated @supabase/auth-helpers-nextjs@0.10.0: This package is now deprecated - please use the @supabase/ssr package instead.
+
+added 296 packages, and audited 297 packages in 10s
+
+106 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
