@@ -42,7 +42,7 @@ const navigation = [
   {
     label: 'Tableau de bord',
     items: [
-      { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+      { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
       { name: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
       { name: 'Notifications', href: '/admin/notifications', icon: Bell, badge: 3 }
     ]
