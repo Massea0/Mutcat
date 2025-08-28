@@ -4,6 +4,10 @@
  */
 
 import type { ModelConfig } from '../types'
+import { tendersModel } from './tenders'
+import { publicationsModel } from './publications'
+import { eventsModel } from './events'
+import { careersModel } from './careers'
 
 export const projectsModel: ModelConfig = {
   name: 'projects',
@@ -469,6 +473,10 @@ export const mediaModel: ModelConfig = {
 export const adminModels = [
   projectsModel,
   newsModel,
+  tendersModel,
+  publicationsModel,
+  eventsModel,
+  careersModel,
   usersModel,
   mediaModel
 ]

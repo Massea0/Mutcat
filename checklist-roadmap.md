@@ -248,4 +248,4 @@
 
 📅 **Dernière mise à jour** : 28 Décembre 2024
 👤 **Responsable** : Équipe MUCTAT Dev
-📊 **Progression globale** : 65%
+📊 **Progression globale** : 85%
