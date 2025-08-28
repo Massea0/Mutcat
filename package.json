@@ -13,6 +13,9 @@
     "db:push": "echo \"Run migrations in Supabase dashboard\"",
     "analyze": "ANALYZE=true next build",
     "seed:users": "tsx src/scripts/seed-users.ts",
+    "db:verify": "tsx scripts/verify-database.ts",
+    "seed:fix": "tsx scripts/fix-and-seed.ts",
+    "seed:prod": "tsx scripts/seed-production-data.ts",
     "seed:users:simple": "tsx src/scripts/seed-users-simple.ts"
   },
   "dependencies": {

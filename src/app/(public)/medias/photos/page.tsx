@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Search, Filter, Download, Eye, Calendar, MapPin } from 'lucide-react';
+import { Search, Filter, Download, Eye, Calendar, MapPin, Camera } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 

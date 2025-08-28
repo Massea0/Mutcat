@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -30,6 +31,7 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
   const supabase = createClient();
 
   useEffect(() => {
@@ -247,22 +249,34 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <button className="p-4 border rounded-lg hover:bg-gray-50 text-left">
+              <button 
+                onClick={() => router.push('/admin/projects')}
+                className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
+              >
                 <Building className="h-6 w-6 text-primary mb-2" />
                 <p className="font-medium">Nouveau projet</p>
                 <p className="text-xs text-gray-500">Créer un projet</p>
               </button>
-              <button className="p-4 border rounded-lg hover:bg-gray-50 text-left">
+              <button 
+                onClick={() => router.push('/admin/news')}
+                className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
+              >
                 <FileText className="h-6 w-6 text-primary mb-2" />
                 <p className="font-medium">Nouvel article</p>
                 <p className="text-xs text-gray-500">Publier une actualité</p>
               </button>
-              <button className="p-4 border rounded-lg hover:bg-gray-50 text-left">
+              <button 
+                onClick={() => router.push('/admin/events')}
+                className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
+              >
                 <Calendar className="h-6 w-6 text-primary mb-2" />
                 <p className="font-medium">Nouvel événement</p>
                 <p className="text-xs text-gray-500">Créer un événement</p>
               </button>
-              <button className="p-4 border rounded-lg hover:bg-gray-50 text-left">
+              <button 
+                onClick={() => router.push('/admin/users')}
+                className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
+              >
                 <Users className="h-6 w-6 text-primary mb-2" />
                 <p className="font-medium">Gérer les utilisateurs</p>
                 <p className="text-xs text-gray-500">Administration</p>

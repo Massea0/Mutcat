@@ -130,13 +130,14 @@ export default function MinistrePage() {
                 <div className="absolute inset-0 bg-senegal-yellow-500 rounded-2xl transform rotate-6"></div>
                 <div className="relative bg-gray-200 rounded-2xl overflow-hidden shadow-2xl">
                   <div className="aspect-[3/4] relative">
-                    <Image
-                      src="/images/portraitministre.png"
-                      alt="Portrait du Ministre"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
+                                  <Image
+                src="/images/portraitministre.png"
+                alt="Portrait du Ministre"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+                priority
+              />
                   </div>
                 </div>
               </div>
